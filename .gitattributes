@@ -1,0 +1,15 @@
+﻿# Ensure shell scripts and Dockerfiles always use LF, never CRLF.
+# This prevents "bad interpreter" errors when scripts are checked out
+# on Windows and then mounted into a Linux container.
+*.sh           text eol=lf
+Dockerfile     text eol=lf
+Makefile       text eol=lf
+*.yml          text eol=lf
+*.yaml         text eol=lf
+
+# Treat these as binary (no conversion)
+*.png          binary
+*.jpg          binary
+*.gif          binary
+*.zip          binary
+*.tar.gz       binary
