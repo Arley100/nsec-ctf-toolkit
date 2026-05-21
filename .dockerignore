@@ -1,0 +1,24 @@
+# ============================================================
+# .dockerignore
+# ============================================================
+# Works exactly like .gitignore but for Docker builds.
+# Files listed here are NOT sent to Docker when building.
+# This keeps builds fast by not uploading unnecessary files.
+# ============================================================
+
+# Don't send challenge files into the build context
+# (they're mounted at runtime via volumes instead)
+challenges/
+wordlists/
+
+# Git history not needed inside the image
+.git/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+.vscode/

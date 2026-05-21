@@ -1,0 +1,43 @@
+# ============================================================
+# docker-compose.yml
+# ============================================================
+# Defines how the CTF toolkit container runs.
+# Instead of a long "docker run" command, type "docker compose run --rm ctf".
+# ============================================================
+
+services:
+  ctf:
+    # Build from the Dockerfile in this directory
+    build: .
+
+    # Image tag used by `make share` and Docker Hub pushes
+    image: nsec-ctf-toolkit
+
+    # Name the running container for easy reference
+    container_name: nsec-toolkit
+
+    # Keep stdin open and allocate a terminal
+    stdin_open: true
+    tty: true
+
+    # Volume mounts: how files move between host and container.
+    # Host path : container path
+    #
+    # - ./challenges  → /ctf/challenges  (challenge files)
+    # - ./scripts     → /ctf/scripts     (your custom scripts, test-tools.sh, ctf-start.sh)
+    # - ./wordlists   → /ctf/wordlists   (extra wordlists; rockyou.txt is baked into /opt/wordlists)
+    volumes:
+      - ./challenges:/ctf/challenges
+      - ./scripts:/ctf/scripts
+      - ./wordlists:/ctf/wordlists
+
+    # Host networking: full access to outbound network from inside the container.
+    # Required for nmap, nc, web challenge interaction, mitmproxy intercept, etc.
+    network_mode: host
+
+    # Keep the container running after exit; reattach with `docker exec`
+    restart: unless-stopped
+
+    # Environment variables inside the container
+    environment:
+      - TERM=xterm-256color
