@@ -16,7 +16,7 @@
 
 FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TZ=America/Toronto
+ENV TZ=America/Montreal
 
 # ── LAYER 1: Core system packages ─────────────────────────────────────
 RUN apt-get update && apt-get install -y \
